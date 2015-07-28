@@ -1,59 +1,179 @@
-<!DOCTYPE html>
-<html ng-app="yopass">
-  <head>
-    <title>Yopass - Share Secrets Securely</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <link rel="icon" type="image/png" href="img/favicon.png" />
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js"></script>
-    <script type="text/javascript" src="js/app.js"></script>
-    <script src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
-  </head>
-<body ng-controller="createController">
-<div class="container">
-  <div class="header">
-    <nav>
-      <ul class="nav nav-pills pull-right">
-      </ul>
-    </nav>
-    <h3 class="text-muted"><a href="#/create">Yopass</a> <small>Share Secrets Securely</small></h3>
-  </div>
+<!doctype html>
+<html>
+    <head>
+        <title>Yopass - Keep a Secret</title>
 
-  <div ng-view>
-  </div>
+        <!-- <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.indigo-pink.min.css"> -->
+        <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.blue-pink.min.css" />
 
-  <div class="row marketing">
-    <div class="col-lg-6">
-      <h4><span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span> In memory storage</h4>
-      <p>The encrypted message is never stored on disk leaving no traces of your data</p>
+        <script src="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.min.js"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
 
-      <h4><span class="glyphicon glyphicon-time" aria-hidden="true"></span> Self destruction</h4>
-      <p>All messages have a fixed time to live and will be deleted automatically after expiration</p>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-      <h4><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Visible Once</h4>
-      <p>The decrypted message can only be viewed once before automatic deletion</p>
+        <style>
+        html {
+            // background: #ECEFF1;
+        }
 
-      <h4><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> API</h4>
-      <p>This site is just a frontend to the Yopass <a href="https://github.com/jhaals/yopass">API</a>, use it to extend other applications. A CLI tool is also available <a href="https://github.com/jhaals/yopass-cli">here</a></p>
-    </div>
+        .mdl-grid {
+            max-width: 70%;
+            position: relative;
+            top: -150px;
+        }
 
-    <div class="col-lg-6">
-      <h4><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> AES-256 Encryption</h4>
-      <p>Encryption and decryption is being made locally in your browser. The decryption key is never stored online</p>
+        .is-small-screen > .mdl-grid {
+          max-width: auto;
+          position: static;
+          top: auto;
+        }
 
-      <h4><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> No caching</h4>
-      <p>Caching headers are disabled</p>
+        .mdl-card {
+          width: 100%;
+          z-index: 1;
+        }
 
-      <h4><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span> Open Source</h4>
-      <p>Yopass is an Open Source project meaning full transparency and the possibility to submit features, fix bugs or run the software yourself</p>
-    </div>
-  </div>
+        .mdl-card__actions a {
+            float: right;
+        }
 
-  <footer class="footer">
-    <p>Yopass is created by <a href="https://github.com/jhaals">Johan Haals</a></p>
-  </footer>
+        .mdl-card__supporting-text {
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+        }
 
-</div> <!-- /container -->
-</body>
+        .mdl-textfield {
+            margin-top: -40px;
+            width: 100%;
+        }
+
+        .mdl-textfield__input {
+        }
+
+        h1 {
+            color: #FFF;
+            letter-spacing: 2px;
+            text-align: center;
+            position: absolute;
+            top: 60px;
+            font-weight: lighter;
+        }
+
+        .mdl-layout header {
+          background: url('/macbook.webp') center / cover;
+          min-height: 240px;
+          z-index: -1;
+        }
+
+        .lifetime {
+          float: left;
+          line-height: 36px;
+        }
+
+        .lifetime label {
+          margin-left: 10px;
+        }
+        </style>
+    </head>
+    <body>
+      <div class="mdl-layout mdl-js-layout">
+        <header class="mdl-layout__header mdl-layout__header--transparent">
+          <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">YoPass</span>
+            <!-- Add spacer, to align navigation to the right -->
+            <div class="mdl-layout-spacer"></div>
+            <!-- Navigation -->
+            <nav class="mdl-navigation">
+              <a class="mdl-navigation__link" href="">Home</a>
+              <a class="mdl-navigation__link" href="">Archive</a>
+              <a class="mdl-navigation__link" href="">Help</a>
+              <a class="mdl-navigation__link" href="">About</a>
+            </nav>
+          </div>
+        </header>
+        <div class="mdl-layout__drawer">
+          <span class="mdl-layout-title">YoPass</span>
+          <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="">Home</a>
+            <a class="mdl-navigation__link" href="">Archive</a>
+            <a class="mdl-navigation__link" href="">Help</a>
+            <a class="mdl-navigation__link" href="">About</a>
+          </nav>
+        </div>
+
+        <main class="mdl-layout__content">
+        </main>
+
+        <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col">
+
+                <form>
+                <div class="mdl-card mdl-shadow--6dp">
+                  <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text">Keep a secret</h2>
+                  </div>
+                  <div class="mdl-card__supporting-text mdl-card--expand">
+                      <div class="mdl-textfield mdl-js-textfield">
+                        <textarea class="mdl-textfield__input" type="text" rows= "5"></textarea>
+                        <label class="mdl-textfield__label" for="sample5">Enter your message here...</label>
+                      </div>
+
+
+                  </div>
+                  <div class="mdl-card__actions mdl-card--border">
+                    <div class="lifetime">
+                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
+                      <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="1" />
+                      <span class="mdl-radio__label">Hour</span>
+                    </label>
+
+                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
+                      <input type="radio" id="option-2" class="mdl-radio__button" name="options" value="1" checked />
+                      <span class="mdl-radio__label">Day</span>
+                    </label>
+
+                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-3">
+                      <input type="radio" id="option-3" class="mdl-radio__button" name="options" value="1" />
+                      <span class="mdl-radio__label">Week</span>
+                    </label>
+                    </div>
+
+                    <a class="mdl-button mdl-button--raised mdl-button--accent mdl-js-button mdl-js-ripple-effect">
+                      Create link
+                    </a>
+                  </div>
+                  <div class="mdl-card__menu">
+                    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                      <i class="material-icons">help</i>
+                    </button>
+                  </div>
+                </div>
+                </form>
+                </br>
+                <h5><i class="material-icons">memory</i> In-memory storage</h5>
+                <p>The encrypted message is never stored on disk leaving no traces of your data.</p>
+
+                <h5><i class="material-icons">alarm</i> Self destruction</h5>
+                <p>All messages have a fixed time to live and will be deleted automatically after expiration.</p>
+
+                <h5><i class="material-icons">remove_red_eye</i> Only viewable once</h5>
+                <p>The decrypted message can only be viewed once before automatic deletion.</p>
+
+                <h5><i class="material-icons">build</i> Extend &amp; embed</h5>
+                <p>This site is just a frontend to the Yopass API, use it to extend other applications. A CLI tool is also available here.</p>
+
+                <h5><i class="material-icons">lock_outline</i> Protected by state of the art cryptography</h5>
+                <p>Encryption and decryption is being made locally in your browser. The decryption key is never stored online.</p>
+
+                <h5><i class="material-icons">cached</i> No caching</h5>
+                <p>Caching headers are disabled</p>
+
+                <h5><i class="material-icons">thumb_up</i> Open Source</h5>
+                <p>Yopass is an Open Source project meaning full transparency and the possibility to submit features, fix bugs or run the software yourself</p>
+            </div>
+        </div>
+    </body>
 </html>
