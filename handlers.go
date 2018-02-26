@@ -41,7 +41,7 @@ func CreateSecret(w http.ResponseWriter, request *http.Request, db Database) {
 		return
 	}
 
-	if len(secret.Message) > 10000 {
+	if len(secret.Message) > 12000 {
 		http.Error(w, `{"message": "Message is too long"}`, http.StatusBadRequest)
 		return
 	}
