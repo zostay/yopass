@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/jhaals/yopass/pkg/yopass"
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
+	"github.com/zostay/yopass/pkg/yopass"
 )
 
 var (

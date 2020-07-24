@@ -12,7 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
-	"github.com/jhaals/yopass/pkg/yopass"
+	"github.com/zostay/yopass/pkg/yopass"
 )
 
 func main() {
