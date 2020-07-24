@@ -1,4 +1,4 @@
-module github.com/jhaals/yopass
+module github.com/zostay/yopass
 
 require (
 	github.com/bradfitz/gomemcache v0.0.0-20180710155616-bc664df96737
